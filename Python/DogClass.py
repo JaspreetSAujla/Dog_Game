@@ -148,4 +148,3 @@ class Dog:
             self.alive = "no"
             print("You did not make", self.name, "happy and he died of sadness.")
             print(self.name, "is resting with the angels now.")
-                 
