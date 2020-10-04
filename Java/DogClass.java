@@ -1,19 +1,17 @@
 package Java;
 import java.util.Random;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
-
 public class DogClass {
     String alive = "yes";
 
     String name;
-    int age;
+    Double age;
     int fitness;
     int hunger;
     int happiness;
     Random ranNum = new Random();
 
-    DogClass(String Name, int Age, int Fitness, int Hunger, int Happiness) {
+    DogClass(String Name, Double Age, int Fitness, int Hunger, int Happiness) {
         this.name = Name;
         this.age = Age;
         this.fitness = Fitness;
@@ -22,7 +20,7 @@ public class DogClass {
     }
 
     public void description() {
-        System.out.println("Name: " + this.name + ", Age: " + Integer.toString(this.age) + ", Fitness: " + Integer.toString(this.fitness) + ", Hunger: " + Integer.toString(this.hunger) + ", Happiness: " + Integer.toString(this.happiness));
+        System.out.println("Name: " + this.name + ", Age: " + Double.toString(this.age) + ", Fitness: " + Integer.toString(this.fitness) + ", Hunger: " + Integer.toString(this.hunger) + ", Happiness: " + Integer.toString(this.happiness));
     }
 
     public void feed() {
@@ -101,7 +99,7 @@ public class DogClass {
             this.happiness -= HappyDec;
         } else {
             int HappyInc = ranNum.nextInt(6);
-            System.out.println("happiness increased by " + HappyInc);
+            System.out.println("Happiness increased by " + HappyInc);
             this.happiness += HappyInc;
         }
     }
