@@ -1,114 +1,253 @@
-import time
 import random
 
 class Dog:
     """ 
     A class which creates dog objects and gives them their behaviours.
-    Contains a feed, relax, exercise and talk methods. These are the activities the dog can do.
+    Contains feed, relax, exercise and talk methods. 
+    These are the activities the dog can do.
     Also checks how happy the dog is, as well as the age and health.
+
+    Attributes:
+        Name = Name of the dog.
+
+        Age = Age of the dog.
+
+        Fitness = fitness of the dog.
+
+        Hunger = Hunger of the dog.
+
+        Happiness = Happiness of the dog.
+    
+    Class Variables:
+        big_number_list = Stores a list of numbers for when big 
+                          changes are required to the attributes.
+        
+        small_number_list = Stores a list of numbers for when small 
+                            changes are required to the attributes.
+        
+        happy_number_list = Stores a list of numbers for when the 
+                            happiness attribute needs to be changed.
+    
+    Methods:
+        __init__ = Initialises the variables of the object.
+
+        __str__ = Returns the status of the dog.
+
+        feed = Feeds the dog.
+
+        relax = Relax with the dog.
+
+        exercise = Exercise the dog.
+
+        talk = Gets the dog to talk.
+
+        happy_checker = Checks how happy the dog is.
+
+        activity_cycle = Makes the activity choosing segment more 
+                         condensed.
+        
+        age_checker = Checks the age of the dog.
+
+        health_checker = Checks the health of the dog.
     """
 
-    bigNumList = list(range(5, 41))
-    smallNumList = list(range(0, 21))
-    happyNumList = list(range(0, 6))
-    alive = "yes"
+    big_number_list = list(range(5, 41))
+    small_number_list = list(range(0, 21))
+    happy_number_list = list(range(0, 6))
 
-    #Sets the initial parameters.
+
+
     def __init__(self, Name, Age, Fitness, Hunger, Happiness):
+        """
+        Defines the initial variables of the object.
+        
+        Variables:
+            self.name = The name of the dog.
+
+            self.age = Age of the dog.
+
+            self.fitness = fitness of the dog.
+
+            self.hunger = Hunger of the dog.
+
+            self.happiness = Happiness of the dog.
+
+            self.alive = Stores whether the dog is alive or not.
+        """
         self.name = Name
         self.age = Age
         self.fitness = Fitness
         self.hunger = Hunger
         self.happiness = Happiness
+        self.alive = "yes"
 
-    #Describes the instance of the class.
+
+
     def __str__(self):
-        return "Dog: {0}, Age: {1}, Fitness: {2}, Hunger: {3}, Happiness: {4}".format(self.name, self.age, self.fitness, self.hunger, self.happiness)
+        """
+        Returns the status of the dog.
+        """
+        return f"Dog: {self.name}, Age: {self.age}, Fitness: {self.fitness}, Hunger: {self.hunger}, Happiness: {self.happiness}"
+
+
         
-    #Describes the different things you can feed your dog and changes the stats randomly in accordance to the action.
     def feed(self):
+        """
+        Runs the method to feed the dog.
+        Picks a random item of food from the foods list and updates 
+        the attributes.
+
+        Variables:
+            foods = Stores a list of foods.
+
+            food_increase = Stores how much the hunger attribute 
+                            will increase by.
+            
+            fitness_decrease = Stores how much the fitness attribute 
+                               will decrease by.
+        """
         foods = ["some cheese.", "some fruit.", "some dogfood.",
                  "a chicken burger? Why??", "a pizza slice.",
                  "a treat."
                  ]
-        foodInc = random.choice(self.bigNumList)
-        fitnessDec = random.choice(self.smallNumList)
-        print("You gave", self.name, random.choice(foods))
-        print("The hunger bar has increased by {0}.".format(foodInc))
-        print("{0} has not moved much. \nFitness decreased by {1}.".format(self.name, fitnessDec))
-        self.hunger += foodInc
-        self.fitness -= fitnessDec
-        self.happyChecker()
+        food_increase = random.choice(self.big_number_list)
+        fitness_decrease = random.choice(self.small_number_list)
+
+        print(f"You gave {self.name} {random.choice(foods)}.")
+        print(f"The hunger bar has increased by {food_increase}.")
+        print(f"{self.name} has not moved much. \nFitness decreased by {fitness_decrease}.")
+        self.hunger += food_increase
+        self.fitness -= fitness_decrease
+        self.happy_checker()
+
+
     
-    #This method describes the relax option and also changes the dog's stats.
     def relax(self):
+        """
+        Method for relaxing with the dog. 
+        Picks a random relaxing task and updates the attributes.
+
+        Variables:
+            relaxation = Stores a list of things to do to relax.
+
+            food_decrease = Stores how much the hunger attribute 
+                            will decrease by.
+            
+            fitness_decrease = Stores how much the fitness attribute 
+                               will decrease by.
+        """
         relaxation = ["cuddle", "watch a movie", "cook",
                       "do yoga", "take selfies", "listen to music", "read"
                       ]
-        foodDec = random.choice(self.smallNumList)
-        fitnessDec = random.choice(self.smallNumList)
-        print("You {0} with {1}.".format(random.choice(relaxation), self.name))
-        print("The hunger bar has decreased by {0}.".format(foodDec))
-        print("{0} has not been active. \nFitness decreased by {1}.".format(self.name, fitnessDec))
-        self.hunger -= foodDec
-        self.fitness -= fitnessDec
-        self.happyChecker()
+        food_decrease = random.choice(self.small_number_list)
+        fitness_decrease = random.choice(self.small_number_list)
 
-    #This method describes the exercise option and changes the stats.
+        print(f"You {random.choice(relaxation)} with {self.name}.")
+        print(f"The hunger bar has decreased by {food_decrease}.")
+        print(f"{self.name} has not been active. \nFitness decreased by {fitness_decrease}.")
+        self.hunger -= food_decrease
+        self.fitness -= fitness_decrease
+        self.happy_checker()
+
+
+
     def exercise(self):
+        """
+        Method for making the dog exercise.
+        Picks a random exercise to do.
+
+        Variables:
+            workouts = Stores a list of random exercises to do.
+
+            food_decrease = Stores how much the hunger attribute 
+                            will decrease by.
+            
+            fitness_increase = Stores how much the fitness will 
+                               increase by.
+        """
         workouts = ["go for a walk", "go for a run",
                     "go for a swim", "dance", "play"
                     ]
-        foodDec = random.choice(self.smallNumList)
-        fitnessInc = random.choice(self.bigNumList)
-        print("You {0} with {1}.".format(random.choice(workouts), self.name))
-        print("The hunger bar has decreased by {0}.".format(foodDec))
-        print("The fitness bar has increased by {0}.".format(fitnessInc))
-        self.fitness += fitnessInc
-        self.hunger -= foodDec
-        self.happyChecker()
+        food_decrease = random.choice(self.small_number_list)
+        fitness_increase = random.choice(self.big_number_list)
 
-    #This method makes the dog talk.
+        print(f"You {random.choice(workouts)} with {self.name}.")
+        print(f"The hunger bar has decreased by {food_decrease}.")
+        print(f"The fitness bar has increased by {fitness_increase}.")
+        self.fitness += fitness_increase
+        self.hunger -= food_decrease
+        self.happy_checker()
+
+
+
     def talk(self):
+        """
+        Method to make the dog talk.
+        Picks a random bark.
+
+        Variables:
+            barks = Stores random barks.
+
+            food_decrease = Stores how much the hunger attribute 
+                            will decrease by.
+
+            fitness_decrease = Stores how much the fitness attribute 
+                               will decrease by.
+        """
         barks = ["woof", "arf", "yap", "heh", "mlem"]
         print("{0} says {1} {1} {1}.".format(self.name, random.choice(barks)))
-        foodDec = random.choice(self.smallNumList)
-        fitnessDec = random.choice(self.smallNumList)
-        print("The hunger bar has decreased by {0}.".format(foodDec))
-        print("{0} has been lazy. \nFitness decreased by {1}.".format(self.name, fitnessDec))
-        self.hunger -= foodDec
-        self.fitness -= fitnessDec
-        self.happyChecker()
+        food_decrease = random.choice(self.small_number_list)
+        fitness_decrease = random.choice(self.small_number_list)
 
-    #This method checks the happiness of the dog.
-    def happyChecker(self):
+        print(f"The hunger bar has decreased by {food_decrease}.")
+        print(f"{self.name} has been lazy. \nFitness decreased by {fitness_decrease}.")
+        self.hunger -= food_decrease
+        self.fitness -= fitness_decrease
+        self.happy_checker()
+
+
+
+    def happy_checker(self):
+        """
+        Checks how happy the dog is and makes changes to the happy 
+        attribute accordingly.
+        
+        Variables:
+            happy_decrease = Stores how much the happiness decreases by.
+
+            happy_increase = Stores how much the happiness increases by.
+        """
         if self.hunger > 80:
-            happyDec = random.choice(self.bigNumList)
-            print("You have overfed {0}.".format(self.name))
-            print("Happiness decreased by {0}.".format(happyDec))
-            self.happiness -= happyDec
+            happy_decrease = random.choice(self.big_number_list)
+            print(f"You have overfed {self.name}.")
+            print(f"Happiness decreased by {happy_decrease}.")
+            self.happiness -= happy_decrease
         elif self.hunger < 10:
-            happyDec = random.choice(self.smallNumList)
-            print("You have underfed {0}.".format(self.name))
-            print("Happiness decreased by {0}.".format(happyDec))
-            self.happiness -= happyDec
+            happy_decrease = random.choice(self.small_number_list)
+            print(f"You have underfed {self.name}.")
+            print(f"Happiness decreased by {happy_decrease}.")
+            self.happiness -= happy_decrease
         elif self.fitness > 90:
-            happyDec = random.choice(self.bigNumList)
-            print("You have worked {0} too hard.".format(self.name))
-            print("Happiness decreased by {0}.".format(happyDec))
-            self.happiness -= happyDec
+            happy_decrease = random.choice(self.big_number_list)
+            print(f"You have worked {self.name} too hard.")
+            print(f"Happiness decreased by {happy_decrease}.")
+            self.happiness -= happy_decrease
         elif self.fitness < 10:
-            happyDec = random.choice(self.smallNumList)
-            print("You have not worked {0} hard enough.".format(self.name))
-            print("Happiness decreased by {0}.".format(happyDec))
-            self.happiness -= happyDec
+            happy_decrease = random.choice(self.small_number_list)
+            print(f"You have not worked {self.name} hard enough.")
+            print(f"Happiness decreased by {happy_decrease}.")
+            self.happiness -= happy_decrease
         else:
-            happyInc = random.choice(self.happyNumList)
-            print("Happiness has increased by {0}.".format(happyInc))
-            self.happiness += happyInc
+            happy_increase = random.choice(self.happy_number_list)
+            print(f"Happiness has increased by {happy_increase}.")
+            self.happiness += happy_increase
 
-    #This function makes the activites code more condensed because it is repeated.
-    def activityCycle(self, activity):
+
+
+    def activity_cycle(self, activity):
+        """
+        Condenses the code for picking an activity.
+        """
         if activity == "relax" or activity == "Relax":
             self.relax()
         elif activity == "exercise" or activity == "Exercise":
@@ -116,35 +255,40 @@ class Dog:
         else:
             self.talk()
 
-    #This method checks the dogs age.
-    def ageChecker(self):
+
+
+    def age_checker(self):
+        """
+        Checks the dog's age.
+        """
         if self.age > 10:
-            print("{0} is over 10 years old. \nHe has lived a happy life and now is resting with the angels.".format(self.name))
+            print(f"{self.name} is over 10 years old. \nHe has lived a happy life and now is resting with the angels.")
             self.alive = "no"
 
-    #This method checks if the dog is healthy and alive.
-    def healthChecker(self):
+
+
+    def health_checker(self):
+        """
+        Checks if the dog is healthy and alive.
+        """
         if self.fitness > 100:
             self.alive = "no"
-            print("You worked {0} too hard and he died of a heart attack.".format(self.name))
-            print(self.name, "is resting with the angels now.")
+            print(f"You worked {self.name} too hard and he died of a heart attack.")      
         elif self.fitness < 0:
             self.alive = "no"
-            print("You didn't exercise", self.name, "enough and he died of obesity.")
-            print(self.name, "is resting with the angels now.")
+            print(f"You didn't exercise {self.name} enough and he died of obesity.")       
         elif self.hunger > 100:
             self.alive = "no"
-            print("You fed", self.name, "too much food and he died of obesity.")
-            print(self.name, "is resting with the angels now.")
+            print(f"You fed {self.name} too much food and he died of obesity.")          
         elif self.hunger < 0:
             self.alive = "no"
-            print("You fed", self.name, "too little food and he died of starvation.")
-            print(self.name, "is resting with the angels now.")
+            print(f"You fed {self.name} too little food and he died of starvation.")         
         elif self.happiness > 200:
             self.alive = "no"
-            print("You made", self.name, "too happy and he died of an overactive heart.")
-            print(self.name, "is resting with the angels now.")
+            print(f"You made {self.name} too happy and he died of an overactive heart.")
         elif self.happiness < 0:
             self.alive = "no"
-            print("You did not make", self.name, "happy and he died of sadness.")
-            print(self.name, "is resting with the angels now.")
+            print(f"You did not make {self.name} happy and he died of sadness.")
+            
+        if self.alive == "no":
+            print(f"{self.name} is resting with the angels now.")

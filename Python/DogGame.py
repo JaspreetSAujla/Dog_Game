@@ -23,6 +23,7 @@ class DogGame:
         """
         use_save_file = None
 
+        # Loops over till user gives valid response.
         while use_save_file != "new" or use_save_file != "continue":
             print("Would you like to start a new game or continue where you left off?")
             use_save_file = input("(new/continue) \n")
