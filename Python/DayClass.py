@@ -1,5 +1,3 @@
-import time
-import random
 import numpy as np
 from DogClass import Dog
 
@@ -8,6 +6,37 @@ class Day:
     A class which highlights the different parts of the day.
     Allows the player to pick a dog.
     Also saves the game regularly.
+
+    Attributes:
+        UseSaveFile = Stores whether the user wants to start a new 
+                      game or continue from an old one.
+    
+    Class Variables:
+        jim,...,chloe = Instances of all the different dogs that 
+                        are playable.
+        
+        DataOut = Stores the data about the dog to be saved into a 
+                  file.
+        
+        DataIn = Stores the data from the save file to be used in the 
+                 game.
+    
+    Methods:
+        __init__ = Defines the initial variables and sets up the game.
+
+        start_game = Allows the user to pick a dog.
+
+        run = Runs the game.
+
+        morning_segment = Defines the morning segment of the day.
+
+        afternoon_segment = Defines the afternoon segment of the day.
+
+        evening_segment = Defines the evening segment of the day.
+
+        extra_activity = Defines the extra activity at the end of the day.
+
+        day_conclusion = Increases age of the dog and saves the game.
     """
 
     jim = Dog("Jim", 3, 34, 47, 60)
@@ -17,14 +46,26 @@ class Day:
     maddie = Dog("Maddie", 6, 47, 76, 48)
     chloe = Dog("Chloe", 1, 23, 28, 48)
 
-    Data = None
+    DataOut = None
     DataIn = None
 
 
-    #Defines the initial variables.
-    def __init__(self, useSaveFile):
-        self.use_save_file = useSaveFile
+
+    def __init__(self, UseSaveFile):
+        """
+        Initialises the variables.
+        Tries to find a save file to start a game.
+        If not, then starts a new game.
+        
+        Variables:
+            self.use_save_file = Stores whether the user wants to 
+                                 continue where they left off or not.
+            
+            self.doggy = Stores which dog is picked.
+        """
+        self.use_save_file = UseSaveFile
         self.doggy = None
+
         #Tries to find a save file.
         if self.use_save_file == "continue":
             try:
@@ -36,82 +77,170 @@ class Day:
                 self.start_game()
         elif self.use_save_file == "new":
             self.start_game()
-        Day.Data = [self.doggy]
+        Day.DataOut = [self.doggy]
 
 
-    #Defines the start of the game.
+
     def start_game(self):
+        """
+        Starts the game and allows the user to pick a dog.
+        
+        Variables:
+            doggy_choice = Stores the choice the user made.
+        """
+        doggy_choice = None
+
         #Introduces the game and allows user to pick a dog.
         print("Hello! Welcome to your very own virtual pet dog simulator.")
         print("Pick a dog to get started.")
-        print("{0} \n{1} \n{2} \n{3} \n{4} \n{5}".format(Day.jim, Day.rover, Day.jack, Day.russell, Day.maddie, Day.chloe))
-        doggyChoice = input("(jim/rover/jack/russell/maddie/chloe) \n")
-        if doggyChoice == "jim" or doggyChoice == "Jim":
-            self.doggy = Day.jim
-        elif doggyChoice == "jack" or doggyChoice == "Jack":
-            self.doggy = Day.jack
-        elif doggyChoice == "russell" or doggyChoice == "Russell":
-            self.doggy = Day.russell
-        elif doggyChoice == "maddie" or doggyChoice == "Maddie":
-            self.doggy = Day.maddie
-        elif doggyChoice == "chloe" or doggyChoice == "Chloe":
-            self.doggy = Day.chloe
-        else:
-            self.doggy = Day.rover
-        print("Your dog is called {0}, and is {1} years old. \n{0} says woof.".format(self.doggy.name, self.doggy.age))
+        print(f"{Day.jim} \n{Day.rover} \n{Day.jack} \n{Day.russell} \n{Day.maddie} \n{Day.chloe}")
+
+        while doggy_choice != "jim" or doggy_choice != "jack" or doggy_choice != "russel" or doggy_choice != "maddie" or doggy_choice != "chloe":
+            doggy_choice = input("(jim/rover/jack/russell/maddie/chloe) \n")
+            if doggy_choice == "jim":
+                self.doggy = Day.jim
+            elif doggy_choice == "jack":
+                self.doggy = Day.jack
+            elif doggy_choice == "russell":
+                self.doggy = Day.russell
+            elif doggy_choice == "maddie":
+                self.doggy = Day.maddie
+            elif doggy_choice == "chloe":
+                self.doggy = Day.chloe
+            elif doggy_choice == "rover":
+                self.doggy = Day.rover
+            else:
+                print("Invalid choice, try again.")
+        print(f"Your dog is called {self.doggy.name}, and is {self.doggy.age} years old. \n{self.doggy.name} says woof.")
 
 
-    #Defines the morning segement.
+    
+    def run(self):
+        """
+        Runs the code for the whole day.
+        """
+        while self.doggy.alive == "yes":
+            self.morning_segment()
+            if self.doggy.alive == "no":
+                break
+            self.afternoon_segment()
+            if self.doggy.alive == "no":
+                break
+            self.evening_segment()
+            if self.doggy.alive == "no":
+                break
+            self.extra_activity()
+            if self.doggy.alive == "no":
+                break
+            self.day_conclusion()
+        print("Thank you for playing.")
+
+
+
     def morning_segment(self):
-        print("You wake up in the morning with {0} laying next to you.".format(self.doggy.name))
-        print("It is breakfast time and this is how your dog is doing: \n", self.doggy)
-        print("What would you like to do with {0}?".format(self.doggy.name))
-        activity = input("(feed/relax/exercise/talk) \n")
-        if activity == "feed" or activity == "Feed":
-            self.doggy.feed()
-        else:
-            self.doggy.activityCycle(activity)
+        """
+        Defines the morning segment of the day.
+        User picks an activity to do with their dog.
+        
+        Variables:
+            activity = Stores the activity the user wants to do.
+        """
+        activity = None
+
+        print(f"You wake up in the morning with {self.doggy.name} laying next to you.")
+        print(f"It is breakfast time and this is how your dog is doing: \n{self.doggy}")
+        print(f"What would you like to do with {self.doggy.name}?")
+
+        while activity != "feed" or activity != "relax" or activity != "exercise" or activity != "talk":
+            activity = input("(feed/relax/exercise/talk) \n")
+            if activity == "feed":
+                self.doggy.feed()
+            elif activity == "relax" or activity == "exercise" or activity == "talk":
+                self.doggy.activity_cycle(activity = activity)
+            else:
+                print("Invalid response, try again.")
         print(self.doggy)
-        self.doggy.healthChecker()
+        self.doggy.health_checker()
 
 
-    #Defines the afternoon segment.
+
     def afternoon_segment(self):
+        """
+        Defines the afternoon segment of the day.
+        User picks an activity to do with their dog.
+        
+        Variables:
+            activity = Stores the activity the user wants to do.
+        """
+        activity = None
         print("It is now the afternoon; the weather is great outside. \nWhat would you like to do?")
-        activity = input("(relax/exercise/talk) \n")
-        self.doggy.activityCycle(activity)
+
+        while activity != "relax" or activity != "exercise" or activity != "talk":
+            activity = input("(relax/exercise/talk) \n")
+            if activity == "relax" or activity == "exercise" or activity == "talk":    
+                self.doggy.activity_cycle(activity = activity)
+            else:
+                print("Invalid response, try again.")
         print(self.doggy)
-        self.doggy.healthChecker()
+        self.doggy.health_checker()
 
 
-    #This defines the evening segment.
+
     def evening_segment(self):
-        print("Time has passed to the evening. {0} is very excited.".format(self.doggy.name))
-        print("What will you do with {0}?".format(self.doggy.name))
-        activity = input("(feed/relax/exercise/talk) \n")
-        if activity == "feed" or activity == "Feed":
-            self.doggy.feed()
-        else:
-            self.doggy.activityCycle(activity)
+        """
+        Defines the evening segment of the day.
+        User picks an activity to do with their dog.
+        
+        Variables:
+            activity = Stores the activity the user wants to do.
+        """
+        activity = None
+        print(f"Time has passed to the evening. {self.doggy.name} is very excited.")
+        print(f"What will you do with {self.doggy.name}?")
+
+        while activity != "feed" or activity != "relax" or activity != "exercise" or activity != "talk":
+            activity = input("(feed/relax/exercise/talk) \n")
+            if activity == "feed":
+                self.doggy.feed()
+            elif activity == "relax" or activity == "exercise" or activity == "talk":
+                self.doggy.activity_cycle(activity = activity)
+            else:
+                print("Invalid response, try again.")
         print(self.doggy)
-        self.doggy.healthChecker()
+        self.doggy.health_checker()
 
 
-    #Defines code for extra activity.
+
     def extra_activity(self):
-        print("There is time to do one more thing! \n{0} is wagging their tail.".format(self.doggy.name))
+        """
+        Defines the code for the extra activity at the end of the day.
+        User picks an activity to do with their dog.
+        
+        Variables:
+            activity = Stores the activity the user wants to do.
+        """
+        activity = None
+        print(f"There is time to do one more thing! \n{self.doggy.name} is wagging their tail.")
         print("What do you do?")
-        activity = input("(relax/exercise/talk) \n")
-        self.doggy.activityCycle(activity)
+
+        while activity != "relax" or activity != "exercise" or activity != "talk":
+            activity = input("(relax/exercise/talk) \n")
+            if activity == "relax" or activity == "exercise" or activity == "talk":    
+                self.doggy.activity_cycle(activity = activity)
+            else:
+                print("Invalid response, try again.")
         print(self.doggy)
-        self.doggy.healthChecker()
+        self.doggy.health_checker()
 
 
-    #Defines the end of the day and saves the game.
+
     def day_conclusion(self):
-        print("It is the end of the day. \nYou and {0} both go to bed together.".format(self.doggy.name))
-        Day.Data[0] = self.doggy
+        """
+        Increases the dog's age and saves the data to a file.
+        """
+        print(f"It is the end of the day. \nYou and {self.doggy.name} both go to bed together.")
+        Day.DataOut[0] = self.doggy
         self.doggy.age += 0.2
-        self.doggy.ageChecker()
-        np.save("SaveFile", Day.Data, allow_pickle=True)
+        self.doggy.age_checker()
+        np.save("SaveFile", Day.DataOut, allow_pickle=True)
         print("PROGRESS HAS BEEN SAVED. \nFeel free to quit.")

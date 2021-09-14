@@ -247,10 +247,13 @@ class Dog:
     def activity_cycle(self, activity):
         """
         Condenses the code for picking an activity.
+
+        Parameters:
+            activity = Passes in the activity the user has chosen.
         """
-        if activity == "relax" or activity == "Relax":
+        if activity == "relax":
             self.relax()
-        elif activity == "exercise" or activity == "Exercise":
+        elif activity == "exercise":
             self.exercise()
         else:
             self.talk()
