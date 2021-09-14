@@ -87,18 +87,23 @@ class Day:
         
         Variables:
             doggy_choice = Stores the choice the user made.
+
+            valid_response = Stores whether the response was valid.
         """
         doggy_choice = None
+        valid_response = False
 
         #Introduces the game and allows user to pick a dog.
         print("Hello! Welcome to your very own virtual pet dog simulator.")
         print("Pick a dog to get started.")
         print(f"{Day.jim} \n{Day.rover} \n{Day.jack} \n{Day.russell} \n{Day.maddie} \n{Day.chloe}")
 
-        while doggy_choice != "jim" or doggy_choice != "jack" or doggy_choice != "russel" or doggy_choice != "maddie" or doggy_choice != "chloe":
+        while valid_response == False:
+            valid_response = True
             doggy_choice = input("(jim/rover/jack/russell/maddie/chloe) \n")
             if doggy_choice == "jim":
                 self.doggy = Day.jim
+                print("yes")
             elif doggy_choice == "jack":
                 self.doggy = Day.jack
             elif doggy_choice == "russell":
@@ -110,6 +115,7 @@ class Day:
             elif doggy_choice == "rover":
                 self.doggy = Day.rover
             else:
+                valid_response = False
                 print("Invalid choice, try again.")
         print(f"Your dog is called {self.doggy.name}, and is {self.doggy.age} years old. \n{self.doggy.name} says woof.")
 
@@ -119,18 +125,18 @@ class Day:
         """
         Runs the code for the whole day.
         """
-        while self.doggy.alive == "yes":
+        while self.doggy.alive == True:
             self.morning_segment()
-            if self.doggy.alive == "no":
+            if self.doggy.alive == False:
                 break
             self.afternoon_segment()
-            if self.doggy.alive == "no":
+            if self.doggy.alive == False:
                 break
             self.evening_segment()
-            if self.doggy.alive == "no":
+            if self.doggy.alive == False:
                 break
             self.extra_activity()
-            if self.doggy.alive == "no":
+            if self.doggy.alive == False:
                 break
             self.day_conclusion()
         print("Thank you for playing.")
@@ -144,20 +150,25 @@ class Day:
         
         Variables:
             activity = Stores the activity the user wants to do.
+
+            valid_response = Stores whether the response was valid.
         """
         activity = None
+        valid_response = False
 
         print(f"You wake up in the morning with {self.doggy.name} laying next to you.")
         print(f"It is breakfast time and this is how your dog is doing: \n{self.doggy}")
         print(f"What would you like to do with {self.doggy.name}?")
 
-        while activity != "feed" or activity != "relax" or activity != "exercise" or activity != "talk":
+        while valid_response == False:
+            valid_response = True
             activity = input("(feed/relax/exercise/talk) \n")
             if activity == "feed":
                 self.doggy.feed()
             elif activity == "relax" or activity == "exercise" or activity == "talk":
                 self.doggy.activity_cycle(activity = activity)
             else:
+                valid_response = False
                 print("Invalid response, try again.")
         print(self.doggy)
         self.doggy.health_checker()
@@ -171,15 +182,20 @@ class Day:
         
         Variables:
             activity = Stores the activity the user wants to do.
+
+            valid_response = Stores whether the response was valid.
         """
         activity = None
+        valid_response = False
         print("It is now the afternoon; the weather is great outside. \nWhat would you like to do?")
 
-        while activity != "relax" or activity != "exercise" or activity != "talk":
+        while valid_response == False:
+            valid_response = True
             activity = input("(relax/exercise/talk) \n")
             if activity == "relax" or activity == "exercise" or activity == "talk":    
                 self.doggy.activity_cycle(activity = activity)
             else:
+                valid_response = False
                 print("Invalid response, try again.")
         print(self.doggy)
         self.doggy.health_checker()
@@ -193,18 +209,23 @@ class Day:
         
         Variables:
             activity = Stores the activity the user wants to do.
+
+            valid_response = Stores whether the response was valid.
         """
         activity = None
+        valid_response = False
         print(f"Time has passed to the evening. {self.doggy.name} is very excited.")
         print(f"What will you do with {self.doggy.name}?")
 
-        while activity != "feed" or activity != "relax" or activity != "exercise" or activity != "talk":
+        while valid_response == False:
+            valid_response = True
             activity = input("(feed/relax/exercise/talk) \n")
             if activity == "feed":
                 self.doggy.feed()
             elif activity == "relax" or activity == "exercise" or activity == "talk":
                 self.doggy.activity_cycle(activity = activity)
             else:
+                valid_response = False
                 print("Invalid response, try again.")
         print(self.doggy)
         self.doggy.health_checker()
@@ -218,16 +239,21 @@ class Day:
         
         Variables:
             activity = Stores the activity the user wants to do.
+
+            valid_response = Stores whether the response was valid.
         """
         activity = None
+        valid_response = False
         print(f"There is time to do one more thing! \n{self.doggy.name} is wagging their tail.")
         print("What do you do?")
 
-        while activity != "relax" or activity != "exercise" or activity != "talk":
+        while valid_response == False:
+            valid_response = True
             activity = input("(relax/exercise/talk) \n")
             if activity == "relax" or activity == "exercise" or activity == "talk":    
                 self.doggy.activity_cycle(activity = activity)
             else:
+                valid_response = False
                 print("Invalid response, try again.")
         print(self.doggy)
         self.doggy.health_checker()

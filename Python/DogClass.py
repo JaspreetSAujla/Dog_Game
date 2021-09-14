@@ -79,7 +79,7 @@ class Dog:
         self.fitness = Fitness
         self.hunger = Hunger
         self.happiness = Happiness
-        self.alive = "yes"
+        self.alive = True
 
 
 
@@ -266,7 +266,7 @@ class Dog:
         """
         if self.age > 10:
             print(f"{self.name} is over 10 years old. \nHe has lived a happy life and now is resting with the angels.")
-            self.alive = "no"
+            self.alive = False
 
 
 
@@ -275,23 +275,23 @@ class Dog:
         Checks if the dog is healthy and alive.
         """
         if self.fitness > 100:
-            self.alive = "no"
+            self.alive = False
             print(f"You worked {self.name} too hard and he died of a heart attack.")      
         elif self.fitness < 0:
-            self.alive = "no"
+            self.alive = False
             print(f"You didn't exercise {self.name} enough and he died of obesity.")       
         elif self.hunger > 100:
-            self.alive = "no"
+            self.alive = False
             print(f"You fed {self.name} too much food and he died of obesity.")          
         elif self.hunger < 0:
-            self.alive = "no"
+            self.alive = False
             print(f"You fed {self.name} too little food and he died of starvation.")         
         elif self.happiness > 200:
-            self.alive = "no"
+            self.alive = False
             print(f"You made {self.name} too happy and he died of an overactive heart.")
         elif self.happiness < 0:
-            self.alive = "no"
+            self.alive = False
             print(f"You did not make {self.name} happy and he died of sadness.")
             
-        if self.alive == "no":
+        if self.alive == False:
             print(f"{self.name} is resting with the angels now.")
