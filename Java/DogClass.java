@@ -1,8 +1,9 @@
 package Java;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class DogClass {
+public class DogClass implements Serializable{
     /**
     A class which creates dog objects and gives them their behaviours.
     Contains feed, relax, exercise and talk methods. 

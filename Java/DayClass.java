@@ -1,5 +1,6 @@
 package Java;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -346,7 +347,7 @@ public class DayClass {
             objectOutputStream = Stores the object output stream.
         */
         String fileName = "SaveFile.txt";
-        FileOutputStream fileOutputStream = new FileOutputStream(fileName);
+        FileOutputStream fileOutputStream = new FileOutputStream(new File(fileName));
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
         objectOutputStream.writeObject(this.doggy);
         objectOutputStream.close();
