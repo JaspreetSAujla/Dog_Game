@@ -1,4 +1,7 @@
 #include<iostream>
+#include<ctime>
+#include<cstdlib>
+#include<vector>
 using namespace std;
 
 #ifndef DOGCLASS_H
