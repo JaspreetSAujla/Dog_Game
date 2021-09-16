@@ -58,6 +58,8 @@ class DogClass {
         int hunger;
         int happiness;
 
+        DogClass();
+
         DogClass(string Name, double Age, int Fitness, int Hunger, int Happiness);
 
         void description();

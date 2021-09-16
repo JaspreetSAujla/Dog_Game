@@ -1,6 +1,5 @@
 #include<iostream>
 #include "DogClass.h"
-#include "DogClass.cpp"
 using namespace std;
 
 #ifndef DAYCLASS_H
@@ -39,6 +38,8 @@ class DayClass {
     */
     
     public:
+        DayClass();
+        
         DayClass(string UseSaveFile);
 
     private:

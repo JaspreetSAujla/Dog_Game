@@ -5,6 +5,10 @@
 #include "DogClass.h"
 using namespace std;
 
+DogClass::DogClass() {}
+
+
+
 DogClass::DogClass(string Name, double Age, int Fitness, int Hunger, int Happiness) {
     name = Name;
     age = Age;
