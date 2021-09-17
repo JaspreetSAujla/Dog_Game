@@ -23,11 +23,11 @@ DogGame::DogGame() {
         cout << "Would you like to start a new game or continue where you left off? \n(new/continue) \n";
         cin >> useSaveFile;
         if (useSaveFile == "new" || useSaveFile == "continue") {
-            game = DayClass(useSaveFile);
+            this->game = DayClass(useSaveFile);
         } else {
             validResponse = false;
             cout << "Invalid response, try again. \n";
         }
     }
-    game.run();
+    this->game.run();
 }

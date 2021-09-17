@@ -22,25 +22,28 @@ DayClass::DayClass(string UseSaveFile) {
         jim,...,chloe = Instances of all the different dogs that 
                         are playable.
     */
-    useSaveFile = UseSaveFile;
+    this->useSaveFile = UseSaveFile;
 
-    DogClass jim = DogClass("Jim", 3.0, 34, 47, 60);
-    DogClass rover = DogClass("Rover", 5.0, 68, 39, 74);
-    DogClass jack = DogClass("Jack", 4.0, 73, 29, 68);
-    DogClass russell = DogClass("Russell", 8.0, 37, 19, 35);
-    DogClass maddie = DogClass("Maddie", 6.0, 47, 76, 48);
-    DogClass chloe = DogClass("Chloe", 1.0, 23, 28, 48);
+    this->jim = DogClass("Jim", 3.0, 34, 47, 60);
+    this->rover = DogClass("Rover", 5.0, 68, 39, 74);
+    this->jack = DogClass("Jack", 4.0, 73, 29, 68);
+    this->russell = DogClass("Russell", 8.0, 37, 19, 35);
+    this->maddie = DogClass("Maddie", 6.0, 47, 76, 48);
+    this->chloe = DogClass("Chloe", 1.0, 23, 28, 48);
 
     // Tries to find a save file.
-    if (useSaveFile == "continue") {
+    if (this->useSaveFile == "continue") {
         try {
-            getSaveFile();
-        } catch (exception e) {
+            int errorCode = getSaveFile();
+            if (errorCode == 1) {
+                throw (errorCode);
+            }
+        } catch (int errorCode) {
             cout << "There was no save file detected. \nStarting a new game... \n";
-            startGame();
+            this->startGame();
         }
-    } else if (useSaveFile == "new") {
-        startGame();
+    } else if (this->useSaveFile == "new") {
+        this->startGame();
     }
 }
 
@@ -270,7 +273,7 @@ void DayClass::dayConclusion() {
 
 
 
-void DayClass::getSaveFile() {
+int DayClass::getSaveFile() {
     /*
     Loads a save file if one exists already.
     Assigns the saved data to the doggy variable.
@@ -281,6 +284,11 @@ void DayClass::getSaveFile() {
     ifstream inputFileStream("SaveFileCPP.txt");
     inputFileStream >> doggy;
     inputFileStream.close();
+    if (doggy.name.size() < 2) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 

@@ -66,7 +66,7 @@ class DayClass {
 
         void dayConclusion();
 
-        void getSaveFile();
+        int getSaveFile();
 
         void saveCurrentProgress();
 };
