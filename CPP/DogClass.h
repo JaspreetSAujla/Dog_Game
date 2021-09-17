@@ -2,6 +2,7 @@
 #include<ctime>
 #include<cstdlib>
 #include<vector>
+#include<fstream>
 using namespace std;
 
 #ifndef DOGCLASS_H
@@ -26,6 +27,10 @@ class DogClass {
         Happiness = Happiness of the dog.        
     
     Methods:
+        operator<< = Overloading '<<' for saving to a file.
+
+        operator>> = Overloading '>>' for loading data in from a file.
+        
         DogClass = Initialises the variables of the object.
 
         description = Returns the status of the dog.
@@ -58,6 +63,9 @@ class DogClass {
         int hunger;
         int happiness;
 
+        friend ostream& operator<<(ostream& outputStream, DogClass& doggy);
+        friend istream& operator>>(istream& inputStream, DogClass& doggy);
+
         DogClass();
 
         DogClass(string Name, double Age, int Fitness, int Hunger, int Happiness);
@@ -83,5 +91,8 @@ class DogClass {
 
         int randomNumber(int startNumber, int endNumber);
 };
+
+ostream& operator<<(ostream& outputStream, DogClass& doggy);
+istream& operator>>(istream& inputStream, DogClass& doggy);
 
 #endif

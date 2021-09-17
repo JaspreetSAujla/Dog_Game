@@ -2,8 +2,31 @@
 #include<ctime>
 #include<cstdlib>
 #include<vector>
+#include<fstream>
 #include "DogClass.h"
 using namespace std;
+
+ostream& operator<<(ostream& outputStream, DogClass& doggy) {
+    outputStream << doggy.name << "\n";
+    outputStream << doggy.age << "\n";
+    outputStream << doggy.fitness << "\n";
+    outputStream << doggy.happiness << "\n";
+    outputStream << doggy.hunger << "\n";
+    outputStream << doggy.alive;
+    return outputStream;
+}
+
+
+
+istream& operator>>(istream& inputStream, DogClass& doggy) {
+    inputStream >> doggy.name;
+    inputStream >> doggy.age;
+    inputStream >> doggy.fitness;
+    inputStream >> doggy.happiness;
+    inputStream >> doggy.hunger;
+    inputStream >> doggy.alive;
+    return inputStream;
+}
 
 DogClass::DogClass() {}
 
