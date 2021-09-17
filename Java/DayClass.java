@@ -324,7 +324,7 @@ public class DayClass {
 
             objectInputStream = Stores the object input stream.
         */
-        String fileName = "SaveFile.txt";
+        String fileName = "SaveFileJava.txt";
         FileInputStream fileInputStream = new FileInputStream(fileName);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
         this.doggy = (DogClass) objectInputStream.readObject();
@@ -346,7 +346,7 @@ public class DayClass {
 
             objectOutputStream = Stores the object output stream.
         */
-        String fileName = "SaveFile.txt";
+        String fileName = "SaveFileJava.txt";
         FileOutputStream fileOutputStream = new FileOutputStream(new File(fileName));
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
         objectOutputStream.writeObject(this.doggy);
