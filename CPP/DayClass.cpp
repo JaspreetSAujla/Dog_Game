@@ -1,6 +1,8 @@
 #include<iostream>
 #include<fstream>
 #include "DayClass.h"
+#include "DogClass.h"
+#include "DogClass.cpp"
 using namespace std;
 
 DayClass::DayClass() {}

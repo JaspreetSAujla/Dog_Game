@@ -1,5 +1,7 @@
 #include<iostream>
 #include "DogGame.h"
+#include "DayClass.h"
+#include "DayClass.cpp"
 using namespace std;
 
 DogGame::DogGame() {
