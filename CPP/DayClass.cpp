@@ -1,4 +1,5 @@
 #include<iostream>
+#include<fstream>
 #include "DayClass.h"
 using namespace std;
 
@@ -119,6 +120,137 @@ void DayClass::run() {
 
 
 
+void DayClass::morningSegment() {
+    /*
+    Defines the morning segment of the day.
+    User picks an activity to do with their dog.
+        
+    Variables:
+        activity = Stores the activity the user wants to do.
+
+        validResponse = Stores whether the response was valid.
+    */
+    string activity;
+    bool validResponse = false;
+
+    cout << "You wake up in the morning with " << doggy.name << " laying next to you." <<
+            "\nIt is breakfast time and this is how your dog is doing: ";
+    doggy.description();
+
+    while (validResponse == false) {
+        validResponse = true;
+        cout << "What would you like to do with " << doggy.name << "? \n(feed/relax/exercise/talk) \n";
+        cin >> activity;
+        if (activity == "feed") {
+            doggy.feed();
+        } else if (activity == "relax" || activity == "exercise" || activity == "talk") {
+            doggy.activityCycle(activity);
+        } else {
+            validResponse = false;
+            cout << "Invalid response, try again. \n";
+        }
+    }
+    doggy.description();
+    doggy.healthChecker(); 
+}
+
+
+
+void DayClass::afternoonSegment() {
+    /*
+    Defines the afternoon segment of the day.
+    User picks an activity to do with their dog.
+        
+    Variables:
+        activity = Stores the activity the user wants to do.
+
+        validResponse = Stores whether the response was valid.
+    */
+    string activity;
+    bool validResponse = false;
+
+    cout << "It is now the afternoon; the weather is great outside. \nWhat would you like to do? \n";
+    while (validResponse == false) {
+        validResponse = true;
+        cout << "(relax/exercise/talk) \n";
+        cin >> activity;
+        if (activity == "relax" || activity == "exercise" || activity == "talk") {
+            doggy.activityCycle(activity);
+        } else {
+            validResponse = false;
+            cout << "Invalid response, try again. \n";
+        }
+    }
+    doggy.description();
+    doggy.healthChecker();
+}
+
+
+
+void DayClass::eveningSegment() {
+    /*
+    Defines the evening segment of the day.
+    User picks an activity to do with their dog.
+        
+    Variables:
+        activity = Stores the activity the user wants to do.
+
+        validResponse = Stores whether the response was valid.
+    */
+    string activity;
+    bool validResponse = false;
+
+    cout << "It is now the evening time. \n";
+    while (validResponse == false) {
+        validResponse = true;
+        cout << "What would you like to do with " << doggy.name << "? \n(feed/relax/exercise/talk) \n";
+        cin >> activity;
+        if (activity == "feed") {
+            doggy.feed();
+        } else if (activity == "relax" || activity == "exercise" || activity == "talk") {
+            doggy.activityCycle(activity);
+        } else {
+            validResponse = false;
+            cout << "Invalid response, try again. \n";
+        }
+    }
+    doggy.description();
+    doggy.healthChecker(); 
+}
+
+
+
+void DayClass::extraActivity() {
+    /*
+    Defines the code for the extra activity at the end of the day.
+    User picks an activity to do with their dog.
+        
+    Variables:
+        activity = Stores the activity the user wants to do.
+
+        validResponse = Stores whether the response was valid.
+    */
+    string activity;
+    bool validResponse = false;
+
+    cout << "There is time to do one more activity! \nWhat would you like to do? \n";
+    while (validResponse == false) {
+        validResponse = true;
+        cout << "(relax/exercise/talk) \n";
+        cin >> activity;
+        if (activity == "relax" || activity == "exercise" || activity == "talk") {
+            doggy.activityCycle(activity);
+        } else {
+            validResponse = false;
+            cout << "Invalid response, try again. \n";
+        }
+    }
+    doggy.description();
+    doggy.healthChecker();
+}
+
+
+
 void DayClass::dayConclusion() {
     /*
     Increases the dog's age and saves the data to a file.
@@ -132,4 +264,42 @@ void DayClass::dayConclusion() {
     } catch (exception e) {
         cout << "Progress NOT saved successfully!! \n";
     }
+}
+
+
+
+void DayClass::getSaveFile() {
+    /*
+    Loads a save file if one exists already.
+    Assigns the saved data to the doggy variable.
+
+    Variables:
+        inputFileStream = Opens file for loading data.
+    */
+    ifstream inputFileStream("SaveFileCPP.txt");
+    inputFileStream >> doggy;
+    inputFileStream.close();
+}
+
+
+
+void DayClass::saveCurrentProgress() {
+    /*
+    Saves the current progress into a file.
+
+    Variables:
+        fileName = Stores the name of the file.
+
+        outputFileStream = Opens file so data can be saved.
+    */
+    const char fileName[16] = "SaveFileCPP.txt";
+    // Try to delete current file if it exists.
+    try {
+        remove(fileName);
+    } catch(exception e) {
+        cout << "File being saved for the first time. \n";
+    }
+    ofstream outputFileStream("SaveFileCPP.txt");
+    outputFileStream << doggy;
+    outputFileStream.close();
 }
