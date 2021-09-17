@@ -42,6 +42,8 @@ class DayClass {
         
         DayClass(string UseSaveFile);
 
+        void run();
+
     private:
         DogClass jim;
         DogClass rover;
@@ -53,8 +55,6 @@ class DayClass {
         string useSaveFile;
 
         void startGame();
-
-        void run();
 
         void morningSegment();
 
