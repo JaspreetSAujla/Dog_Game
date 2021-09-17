@@ -1,7 +1,7 @@
 # Dog_Game
 A simple text-based game which allows you to pick a dog and 
 look after them. Keep them fit, healthy and happy. 
-There are both Python and Java versions of the code.
+There are both Python, Java, and C++ versions of the code.
 
 # main:
 This is the file to run.
